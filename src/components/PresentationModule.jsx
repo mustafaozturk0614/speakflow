@@ -559,20 +559,7 @@ Format response as JSON:
             fontWeight: "600",
             color: "#c084fc"
           }}>
-            🗣️ Hedef Cümle: {slide.id === 1 ? "Konumuz, kullanıcı tanıma akışımızın HTTPS geçişiyle birlikte nasıl etkileneceği." : 
-                              slide.id === 2 ? "Sunum boyunca altı temel başlığı ele alacağız." :
-                              slide.id === 3 ? "Akış kısalır, kullanıcı deneyimi pürüzsüz hâle gelir." :
-                              slide.id === 4 ? "Trafik şifresiz olduğu için operatör isteğin içeriğini görebiliyordu." :
-                              slide.id === 5 ? "HTTPS geçişi artık isteğe bağlı değil, katı bir son tarihtir." :
-                              slide.id === 6 ? "Trafiğimiz şifreli bir tünel içinden akmaya başlar." :
-                              slide.id === 7 ? "Her ek adım, dönüşümde ölçülebilir bir düşüş yaratır." :
-                              slide.id === 8 ? "Hiçbir şey yapmamak bir seçenek değildir, acele etmek de çözüm değildir." :
-                              slide.id === 9 ? "Backend'in kullanıcıyı tanımaya devam etmesi için MSISDN akışını korumalıyız." :
-                              slide.id === 10 ? "Operatör artık MSISDN'i isteğin içine değil, el sıkışmanın içine yerleştirir." :
-                              slide.id === 11 ? "Proxy telefon numarasını ayıklar ve standart başlık formatına çevirir." :
-                              slide.id === 12 ? "Farklı tarayıcılar ve cihazlar aynı şekilde davranmayabilir." :
-                              slide.id === 13 ? "Her biri bağımsız değerlendirilebilen dört ek alternatif çözümümüz var." :
-                              slide.id === 14 ? "Geliştirdiğimiz proxy çözümü varsayılan mobil tarayıcılarda sorunsuz çalışmaktadır." : "Cümleyi kurun."}
+            🗣️ Hedef Cümle: {slide.sentenceBuilder.targetTr || "Cümleyi kurun."}
           </div>
 
           {/* Builder Drop Area */}
