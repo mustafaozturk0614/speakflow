@@ -157,7 +157,15 @@ export const toggleVocabulary = (item) => {
   if (idx > -1) {
     list.splice(idx, 1);
   } else {
-    list.push(item);
+    // Inject default SRS parameters if missing
+    const srsItem = {
+      ...item,
+      srsStage: 0,
+      nextReviewDate: Date.now(),
+      interval: 0,
+      easeFactor: 2.5
+    };
+    list.push(srsItem);
     added = true;
     unlockBadge("first_word");
     if (list.length >= 10) unlockBadge("words_10");
@@ -168,3 +176,54 @@ export const toggleVocabulary = (item) => {
   syncLocalToCloud();
   return added;
 };
+
+// 6. Spaced Repetition (SRS) Engine
+export const updateVocabularyCardSrs = (english, type, rating) => {
+  const list = getVocabulary();
+  const idx = list.findIndex(i => i.english === english && i.type === type);
+  if (idx > -1) {
+    const card = list[idx];
+    let stage = card.srsStage || 0;
+    let factor = card.easeFactor || 2.5;
+    let interval = card.interval || 0;
+
+    if (rating === "hard") {
+      stage = 0;
+      interval = 1; // 1 day
+      factor = Math.max(1.3, factor - 0.2);
+    } else if (rating === "good") {
+      stage += 1;
+      if (stage === 1) {
+        interval = 1;
+      } else if (stage === 2) {
+        interval = 3;
+      } else {
+        interval = Math.round(interval * factor);
+      }
+    } else if (rating === "easy") {
+      stage += 2;
+      factor = factor + 0.15;
+      if (stage === 1) {
+        interval = 1;
+      } else if (stage === 2) {
+        interval = 3;
+      } else {
+        interval = Math.round(interval * factor * 1.5);
+      }
+    }
+
+    card.srsStage = stage;
+    card.easeFactor = factor;
+    card.interval = interval;
+    // Set next review date. For demo/practice purposes, we will use hours or minutes instead of days
+    // to let the user see review cards appear quickly. Let's make 1 interval unit = 1 hour instead of 24 hours!
+    // That way they can practice and see them appear again in the same day, which is awesome.
+    card.nextReviewDate = Date.now() + interval * 60 * 60 * 1000; 
+
+    localStorage.setItem("speakflow_vocabulary", JSON.stringify(list));
+    window.dispatchEvent(new CustomEvent("speakflow_vocabulary_changed"));
+    awardXP(15); // +15 XP for studying!
+    syncLocalToCloud();
+  }
+};
+

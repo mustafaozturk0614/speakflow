@@ -21,7 +21,8 @@ import {
   getDailyTasks, 
   getUnlockedBadges, 
   getVocabulary, 
-  toggleVocabulary 
+  toggleVocabulary,
+  updateVocabularyCardSrs
 } from "../utils/gamification";
 import { speakText } from "../utils/speech";
 import { hasApiKey, callGeminiAPI } from "../utils/gemini";
@@ -51,6 +52,11 @@ export default function DashboardModule() {
   const [newTr, setNewTr] = useState("");
   const [newType, setNewType] = useState("custom");
   const [aiLoading, setAiLoading] = useState(false);
+
+  // States for SRS Spaced Repetition study mode
+  const [vocabTab, setVocabTab] = useState("list"); // list or srs
+  const [srsFlipped, setSrsFlipped] = useState(false);
+  const [currentSrsIdx, setCurrentSrsIdx] = useState(0);
 
   useEffect(() => {
     // Run streak checker on dashboard open
@@ -466,59 +472,204 @@ Respond ONLY with this JSON. Do not include markdown code block syntax.
           </div>
 
           {/* Vocabulary Box */}
-          <div className="glass-panel" style={{ padding: "25px", display: "flex", flexDirection: "column", gap: "15px", maxHeight: "350px", overflowY: "auto" }}>
-            <h3 style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "1.1rem" }}>
-              <BookMarked size={18} style={{ color: "var(--color-success)" }} />
-              Kişisel Sözlüğüm ({vocabList.length} İfade)
-            </h3>
+          <div className="glass-panel" style={{ padding: "25px", display: "flex", flexDirection: "column", gap: "15px", minHeight: "380px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid var(--border-glass)", paddingBottom: "12px", flexWrap: "wrap", gap: "10px" }}>
+              <h3 style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "1.1rem", margin: 0 }}>
+                <BookMarked size={18} style={{ color: "var(--color-success)" }} />
+                Kişisel Sözlüğüm ({vocabList.length})
+              </h3>
+              
+              <div style={{ display: "flex", gap: "6px" }}>
+                <button
+                  onClick={() => setVocabTab("list")}
+                  className={`btn ${vocabTab === "list" ? "btn-primary" : "btn-secondary"}`}
+                  style={{ padding: "4px 8px", fontSize: "0.75rem", borderRadius: "6px" }}
+                >
+                  Liste
+                </button>
+                <button
+                  onClick={() => { setVocabTab("srs"); setSrsFlipped(false); setCurrentSrsIdx(0); }}
+                  className={`btn ${vocabTab === "srs" ? "btn-primary" : "btn-secondary"}`}
+                  style={{ padding: "4px 8px", fontSize: "0.75rem", borderRadius: "6px", display: "flex", alignItems: "center", gap: "4px" }}
+                >
+                  <span>🧠 Tekrar Odası</span>
+                  {vocabList.filter(item => !item.nextReviewDate || item.nextReviewDate <= Date.now()).length > 0 && (
+                    <span style={{
+                      background: "var(--color-danger)",
+                      color: "white",
+                      fontSize: "0.65rem",
+                      padding: "1px 5px",
+                      borderRadius: "10px",
+                      fontWeight: "700"
+                    }}>
+                      {vocabList.filter(item => !item.nextReviewDate || item.nextReviewDate <= Date.now()).length}
+                    </span>
+                  )}
+                </button>
+              </div>
+            </div>
             
-            {vocabList.length === 0 ? (
-              <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", textAlign: "center", padding: "15px" }}>
-                Henüz sözlüğe ifade kaydetmediniz. Doğal İfadeler ve Konuşma Kalıpları modüllerinden kelimelerin yanındaki yıldız simgesine tıklayarak ekleyebilirsiniz.
-              </p>
-            ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                {vocabList.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="glass-card"
-                    style={{
-                      padding: "10px 15px",
-                      margin: 0,
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center"
-                    }}
-                  >
-                    <div>
-                      <div style={{ fontSize: "0.9rem", fontWeight: "700", color: "#c084fc" }}>
-                        {item.english}
-                        <span className="badge badge-primary" style={{ fontSize: "0.6rem", padding: "2px 6px", marginLeft: "8px" }}>
-                          {item.type === "expression" ? "deyim" : item.type === "pattern" ? "kalıp" : item.type === "term" ? "terim" : "özel"}
-                        </span>
+            {vocabTab === "list" ? (
+              // ================= SUB-TAB 1: TRADITIONAL LIST =================
+              vocabList.length === 0 ? (
+                <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", textAlign: "center", padding: "15px" }}>
+                  Henüz sözlüğe ifade kaydetmediniz. Doğal İfadeler ve Konuşma Kalıpları modüllerinden kelimelerin yanındaki yıldız simgesine tıklayarak ekleyebilirsiniz.
+                </p>
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px", maxHeight: "300px", overflowY: "auto", paddingRight: "5px" }}>
+                  {vocabList.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="glass-card"
+                      style={{
+                        padding: "10px 15px",
+                        margin: 0,
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center"
+                      }}
+                    >
+                      <div>
+                        <div style={{ fontSize: "0.9rem", fontWeight: "700", color: "#c084fc" }}>
+                          {item.english}
+                          <span className="badge badge-primary" style={{ fontSize: "0.6rem", padding: "2px 6px", marginLeft: "8px" }}>
+                            {item.type === "expression" ? "deyim" : item.type === "pattern" ? "kalıp" : item.type === "term" ? "terim" : "özel"}
+                          </span>
+                        </div>
+                        <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "2px" }}>{item.turkish}</div>
                       </div>
-                      <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "2px" }}>{item.turkish}</div>
+
+                      <div style={{ display: "flex", gap: "6px" }}>
+                        <button
+                          type="button"
+                          onClick={() => handleSpeakWord(item.english)}
+                          className="btn btn-secondary btn-icon"
+                          style={{ width: "26px", height: "26px", border: "none" }}
+                        >
+                          <Volume2 size={12} />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveWord(item)}
+                          className="btn btn-danger btn-icon"
+                          style={{ width: "26px", height: "26px", border: "none", background: "rgba(239, 68, 68, 0.1)" }}
+                        >
+                          <Trash2 size={12} style={{ color: "var(--color-danger)" }} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )
+            ) : (
+              // ================= SUB-TAB 2: SRS STUDY ROOM =================
+              (() => {
+                const reviewCards = vocabList.filter(item => !item.nextReviewDate || item.nextReviewDate <= Date.now());
+                if (reviewCards.length === 0) {
+                  return (
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: "15px", padding: "30px 15px", animation: "fadeIn 0.2s ease" }}>
+                      <span style={{ fontSize: "2.5rem" }}>🎉</span>
+                      <h4 style={{ margin: 0, color: "var(--color-success)" }}>Harika! Tekrar Edilecek Kelime Yok</h4>
+                      <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", margin: 0, maxWidth: "320px" }}>
+                        Tüm kelimeleri hafızanıza kaydettiniz. Yeni kelimeler ekledikçe veya zaman geçtikçe sistem size yeni tekrarlar hazırlayacaktır.
+                      </p>
+                    </div>
+                  );
+                }
+
+                const activeCard = reviewCards[currentSrsIdx % reviewCards.length];
+                
+                const handleRateSrs = (card, rating) => {
+                  updateVocabularyCardSrs(card.english, card.type, rating);
+                  setSrsFlipped(false);
+                  setCurrentSrsIdx(0); // Reset index as active card leaves queue
+                };
+
+                return (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "15px", animation: "fadeIn 0.2s ease" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "0.75rem", color: "var(--text-muted)" }}>
+                      <span>Seviye Aşaması: <b>Stage {activeCard.srsStage || 0}</b></span>
+                      <span>Tekrar Kuyruğu: <b>{reviewCards.length} kelime</b></span>
                     </div>
 
-                    <div style={{ display: "flex", gap: "6px" }}>
-                      <button
-                        onClick={() => handleSpeakWord(item.english)}
-                        className="btn btn-secondary btn-icon"
-                        style={{ width: "26px", height: "26px", border: "none" }}
-                      >
-                        <Volume2 size={12} />
-                      </button>
-                      <button
-                        onClick={() => handleRemoveWord(item)}
-                        className="btn btn-danger btn-icon"
-                        style={{ width: "26px", height: "26px", border: "none", background: "rgba(239, 68, 68, 0.1)" }}
-                      >
-                        <Trash2 size={12} style={{ color: "var(--color-danger)" }} />
-                      </button>
+                    {/* Flashing interactive card */}
+                    <div 
+                      onClick={() => !srsFlipped && setSrsFlipped(true)}
+                      style={{
+                        background: "rgba(255,255,255,0.02)",
+                        border: "1.5px dashed var(--border-glass)",
+                        borderRadius: "12px",
+                        padding: "25px 20px",
+                        textAlign: "center",
+                        minHeight: "140px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "10px",
+                        cursor: !srsFlipped ? "pointer" : "default",
+                        transition: "all 0.3s ease",
+                        boxShadow: !srsFlipped ? "0 4px 15px rgba(0,0,0,0.15)" : "none"
+                      }}
+                      className={!srsFlipped ? "srs-hover" : ""}
+                    >
+                      {!srsFlipped ? (
+                        <>
+                          <span className="badge badge-primary" style={{ fontSize: "0.6rem" }}>
+                            {activeCard.type === "expression" ? "deyim" : activeCard.type === "pattern" ? "kalıp" : activeCard.type === "term" ? "terim" : "özel"}
+                          </span>
+                          <h2 style={{ fontSize: "1.5rem", color: "#c084fc", margin: 0, fontWeight: "700" }}>{activeCard.english}</h2>
+                          <div style={{ display: "flex", gap: "8px", marginTop: "5px" }}>
+                            <button
+                              type="button"
+                              onClick={(e) => { e.stopPropagation(); handleSpeakWord(activeCard.english); }}
+                              className="btn btn-secondary btn-icon"
+                              style={{ width: "28px", height: "28px", border: "none" }}
+                              title="Seslendir"
+                            >
+                              <Volume2 size={12} />
+                            </button>
+                          </div>
+                          <span style={{ fontSize: "0.75rem", color: "var(--color-primary)", marginTop: "10px" }}>🔍 Çevirmek İçin Tıkla</span>
+                        </>
+                      ) : (
+                        <>
+                          <span style={{ fontSize: "0.80rem", color: "var(--text-muted)", textDecoration: "underline" }}>{activeCard.english}</span>
+                          <h2 style={{ fontSize: "1.4rem", color: "var(--color-secondary)", margin: "5px 0" }}>{activeCard.turkish}</h2>
+                          
+                          {/* Rating Buttons */}
+                          <div style={{ display: "flex", gap: "8px", width: "100%", marginTop: "15px" }}>
+                            <button
+                              type="button"
+                              onClick={() => handleRateSrs(activeCard, "hard")}
+                              className="btn btn-danger"
+                              style={{ flex: 1, padding: "8px 0", fontSize: "0.75rem", borderRadius: "6px", gap: "3px" }}
+                            >
+                              🔴 Zor (Tekrar)
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleRateSrs(activeCard, "good")}
+                              className="btn btn-warning"
+                              style={{ flex: 1, padding: "8px 0", fontSize: "0.75rem", borderRadius: "6px", gap: "3px" }}
+                            >
+                              🟡 Orta
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleRateSrs(activeCard, "easy")}
+                              className="btn btn-success"
+                              style={{ flex: 1, padding: "8px 0", fontSize: "0.75rem", borderRadius: "6px", gap: "3px" }}
+                            >
+                              🟢 Kolay
+                            </button>
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
-                ))}
-              </div>
+                );
+              })()
             )}
           </div>
 
