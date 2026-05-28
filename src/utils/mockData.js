@@ -552,8 +552,8 @@ export const presentationSlides = [
     id: 1,
     titleTr: "SLAYT 01 · Kapak — HTTPS Geçişi",
     titleEn: "SLIDE 01 · Cover — HTTPS Migration",
-    scriptTr: "Merhaba arkadaşlar. Bugün HTTPS geçişi hakkında konuşacağım. Mobil hatlardan telefon numarasını HTTP üzerinden otomatik olarak alıyoruz. Ancak HTTPS ile bu yapı değişecek. Şimdi çözümlere ve detaylara bakalım.",
-    scriptEn: "Hello everyone. Today, I will talk about HTTPS transition. We automatically get the user's phone number over HTTP. But HTTPS will change this. Let's look at the solutions.",
+    scriptTr: "Merhaba arkadaşlar. Bugün sizlere şirketimiz açısından önem taşıyan teknik bir gündemi, mümkün olduğunca anlaşılır bir dille aktarmaya çalışacağım. Konumuz, kullanıcı tanıma akışımızın HTTPS geçişiyle birlikte nasıl etkileneceği. Bazı ürünlerimizde kullanıcının telefon numarasını otomatik tanıyarak onu doğrudan akışa alıyoruz. HTTP üzerinde rahatlıkla çalışan bu yapı, HTTPS'e geçişle birlikte yeniden tasarlanmak durumunda. Birlikte, bu değişimin sebebine ve önümüzdeki çözüm yollarına bakacağız.",
+    scriptEn: "Good morning everyone. Today I'd like to walk you through a technical topic that has direct implications for our business — and I'll do my best to keep the explanation accessible. Our subject is how our user recognition flow will be affected by the upcoming HTTPS migration. In some of our products, we recognize users automatically by reading their phone number from the network. This works smoothly today over HTTP, but with the migration to HTTPS this mechanism needs to be redesigned. We'll look together at why this change is necessary and what solutions are on the table.",
     vocabulary: [
       { word: "migration", tr: "göç / geçiş" },
       { word: "implications", tr: "etkiler / sonuçlar" },
@@ -563,17 +563,17 @@ export const presentationSlides = [
       { word: "Aggregator (Entegratör)", tr: "Operatörler ile CP'ler arasında mobil ödeme teknik altyapısını sağlayan aracı şirket." }
     ],
     sentenceBuilder: {
-      target: "Today I will talk about HTTPS transition",
-      targetTr: "Bugün HTTPS geçişi hakkında konuşacağım.",
-      words: ["Today", "I", "will", "talk", "about", "HTTPS", "transition"]
+      target: "Today I'd like to walk you through a technical topic",
+      targetTr: "Bugün sizi teknik bir konudan geçirmek (konuyu aktarmak) istiyorum.",
+      words: ["Today", "I'd", "like", "to", "walk", "you", "through", "a", "technical", "topic", "project", "meeting"]
     }
   },
   {
     id: 2,
     titleTr: "SLAYT 02 · Gündem",
     titleEn: "SLIDE 02 · Agenda",
-    scriptTr: "Bugün altı konumuz var. İlk olarak, header enrichment nedir? İkinci olarak, HTTP üzerinde nasıl çalışır? Üçüncü olarak, yeni Chrome güncellemesi. Sonra, HTTPS değişiklikleri. Son olarak da çözümlerimiz.",
-    scriptEn: "Today we have six topics. First, what is header enrichment? Second, how it works over HTTP. Third, the new Chrome update. Then, the HTTPS changes. Finally, our solutions.",
+    scriptTr: "Sunum boyunca altı temel başlığı ele alacağız. Önce header enrichment dediğimiz yapının ne olduğunu anlatacağım. Ardından bu yapının HTTP üzerinde nasıl işlediğini göstereceğim. Üçüncü başlıkta, ekim ayında devreye girecek Chrome güncellemesinin neden bizim için bir dönüm noktası olduğunu konuşacağız. Sonrasında HTTPS'e geçtiğimizde tam olarak neyin değiştiğini ve bu değişikliğin uygulamamızı nasıl etkilediğini paylaşacağım. Son bölümde Türk Telekom'un önerdiği Extension 1000 çözümünü ve yanında planlamamız gereken yedek senaryoları ele alacağız.",
+    scriptEn: "Throughout this session we'll cover six core topics. First, I'll explain what header enrichment is. Then I'll show how it works over HTTP today. Third, we'll discuss why the Chrome update arriving in October is a turning point for us. After that we'll look at exactly what changes when we move to HTTPS and how this impacts our application. In the final section we'll discuss Turkcell-style operator solution — Extension 1000 — and the alternative approaches we should evaluate alongside it.",
     vocabulary: [
       { word: "turning point", tr: "dönüm noktası" },
       { word: "header enrichment", tr: "başlık zenginleştirme (operatörün numara enjekte etmesi)" },
@@ -581,17 +581,17 @@ export const presentationSlides = [
       { word: "alternative approaches", tr: "alternatif yaklaşımlar" }
     ],
     sentenceBuilder: {
-      target: "Today we have six topics",
-      targetTr: "Bugün altı konumuz var.",
-      words: ["Today", "we", "have", "six", "topics"]
+      target: "Throughout this session we will cover six core topics",
+      targetTr: "Bu oturum boyunca altı temel konuyu ele alacağız.",
+      words: ["Throughout", "this", "session", "we", "will", "cover", "six", "core", "topics", "agenda", "gündem", "seven"]
     }
   },
   {
     id: 3,
     titleTr: "SLAYT 03 · Header Enrichment Nedir?",
     titleEn: "SLIDE 03 · What is Header Enrichment?",
-    scriptTr: "Header enrichment nedir? Operatör, telefon numarasını isteğe ekler. Sistemimiz bu numarayı otomatik olarak okur. Kullanıcı numara yazmak zorunda kalmaz. Bu işlem çok hızlı ve kolaydır.",
-    scriptEn: "What is header enrichment? The operator adds the phone number to the request. Our system reads it automatically. The user does not write their phone number. This is fast and easy.",
+    scriptTr: "Header enrichment'ı şöyle ifade edebiliriz: Kullanıcı sitemize geldiğinde, operatör onun telefon numarasını isteğin üzerine küçük bir not olarak ekler. Backend sistemimiz bu notu okur ve kullanıcıyı doğrudan tanır. Bu sayede kullanıcı, telefon numarasını girmek ya da OTP doğrulamasından geçmek zorunda kalmaz. Akış kısalır, kullanıcı deneyimi pürüzsüz hâle gelir; dönüşüm oranlarımız da bu sayede yüksek seviyede kalır. Anahtar kavramımız burada MSISDN — yani kullanıcının telefon numarasıdır.",
+    scriptEn: "Let me describe header enrichment in simple terms. When a user reaches our site, the operator adds the phone number to the request as a small note in the header. Our backend reads this note and recognizes the user automatically. As a result, the user doesn't have to enter their phone number or go through an OTP verification. The flow becomes shorter and the experience becomes frictionless, which directly supports our high conversion rates. The key concept here is MSISDN — in other words, the user's phone number.",
     vocabulary: [
       { word: "frictionless", tr: "sürtünmesiz / pürüzsüz" },
       { word: "conversion rates", tr: "dönüşüm oranları" },
@@ -601,17 +601,17 @@ export const presentationSlides = [
       { word: "CR (Conversion Rate)", tr: "Dönüşüm Oranı. Ziyaretçilerin aboneye dönüşme yüzdesi." }
     ],
     sentenceBuilder: {
-      target: "This is fast and easy",
-      targetTr: "Bu işlem hızlı ve kolaydır.",
-      words: ["This", "is", "fast", "and", "easy"]
+      target: "The key concept here is MSISDN",
+      targetTr: "Buradaki anahtar kavram MSISDN'dir.",
+      words: ["The", "key", "concept", "here", "is", "MSISDN", "number", "verification", "phone"]
     }
   },
   {
     id: 4,
     titleTr: "SLAYT 04 · HTTP Üzerinde Akış Nasıl İşliyordu?",
     titleEn: "SLIDE 04 · How Did the Flow Work Over HTTP?",
-    scriptTr: "HTTP protokolünde trafik şifreli değildir. Bu yüzden operatör isteği görebilir ve telefon numarasını ekleyebilir. Sistemimiz kullanıcıyı anında tanır. Kullanıcının fazladan bir şey yapması gerekmez.",
-    scriptEn: "On HTTP, traffic is not encrypted. So, the operator can see the request. They add the phone number easily. Our system reads it instantly. The user has no extra steps.",
+    scriptTr: "HTTP üzerinde bu akış oldukça yalın bir biçimde işliyordu. Trafik şifreli olmadığı için operatör, isteğin içeriğine erişebiliyor ve telefon numarasını isteğe başlık olarak ekleyebiliyordu. Backend bu başlığı okuyarak kullanıcıyı anında tanıyabiliyordu. Bu yapı bizim için son derece değerliydi; çünkü kullanıcıdan herhangi bir ek adım talep etmeden iç akışa geçmek mümkündü. Reklamı tıklayan kullanıcı, doğrudan abonelik veya işlem akışına dâhil edilebiliyordu.",
+    scriptEn: "Over HTTP, this flow used to operate in a very straightforward way. Because the traffic was unencrypted, the operator could see inside the request and add the phone number as a header. The backend read this header and recognized the user instantly. This setup was extremely valuable to us, since it allowed us to move the user into the flow without requiring any additional step. A user clicking on an advertisement could be taken directly into the subscription or transaction journey.",
     vocabulary: [
       { word: "unencrypted", tr: "şifrelenmemiş" },
       { word: "straightforward", tr: "yalın / basit" },
@@ -621,17 +621,17 @@ export const presentationSlides = [
       { word: "Renewal", tr: "Yenileme. Abonelik dönemi sonunda servis ücretinin faturadan tekrar otomatik çekilmesi." }
     ],
     sentenceBuilder: {
-      target: "The user has no extra steps",
-      targetTr: "Kullanıcının ekstra adımları yoktur.",
-      words: ["The", "user", "has", "no", "extra", "steps"]
+      target: "A user clicking on an advertisement could be taken directly",
+      targetTr: "Bir reklama tıklayan kullanıcı doğrudan alınabiliyordu.",
+      words: ["A", "user", "clicking", "on", "an", "advertisement", "could", "be", "taken", "directly", "ad", "flow", "go"]
     }
   },
   {
     id: 5,
     titleTr: "SLAYT 05 · Google Chrome Güncellemesi / HTTPS Zorunluluğu",
     titleEn: "SLIDE 05 · Google Chrome Update / HTTPS Push",
-    scriptTr: "Bu geçiş neden önemli? Google Chrome, HTTP siteleri için güvenlik uyarıları gösterecek. Kullanıcılar sayfamızı terk edecek. Bu durum müşteri ve para kaybettirecek. Bu yüzden HTTPS'e geçmeliyiz.",
-    scriptEn: "Why is this important? Google Chrome will show security warnings for HTTP sites. Users will leave our page. We will lose users and money. We must move to HTTPS.",
+    scriptTr: "Şimdi gelin, bu konuyu neden bu kadar öncelikli gündemimize aldığımızı konuşalım. Web ekosistemi uzun zamandır HTTPS'e doğru yönelmiş durumda; ancak önümüzde belirleyici bir tarih var: Ekim 2026. Bu tarihte yayımlanacak Chrome güncellemesiyle birlikte, HTTP üzerinden çalışan sitelerde kullanıcıya gösterilen güvenlik uyarıları çok daha görünür hâle gelecek. Pek çok kullanıcı bu uyarıyla karşılaştığında doğrudan geri dönüyor; landing sayfamız hiç açılmadan kullanıcıyı kaybedebiliyoruz. Reklam bütçesini harcadığımız hâlde dönüşüm gerçekleşmiyor. Bu nedenle HTTPS'e geçiş, bizim için artık bir tercih değil; takvime bağlanmış bir zorunluluk hâline gelmiştir.",
+    scriptEn: "Now let's talk about why this topic has become such a high priority. The web ecosystem has been steadily moving toward HTTPS for years, but there is a decisive date ahead of us: October 2026. With the Chrome release on that date, the security warnings shown for HTTP sites will become significantly more visible. Many users abandon the page when they see such a warning; we lose the user before our landing page even loads. Despite spending the advertising budget, no conversion takes place. For this reason, HTTPS migration is no longer optional for us — it has become a hard deadline.",
     vocabulary: [
       { word: "decisive date", tr: "belirleyici tarih" },
       { word: "security warnings", tr: "güvenlik uyarıları" },
@@ -639,17 +639,17 @@ export const presentationSlides = [
       { word: "hard deadline", tr: "kesin / katı son tarih" }
     ],
     sentenceBuilder: {
-      target: "We must move to HTTPS",
-      targetTr: "HTTPS'e geçmek zorundayız.",
-      words: ["We", "must", "move", "to", "HTTPS"]
+      target: "For this reason HTTPS migration is no longer optional",
+      targetTr: "Bu nedenle HTTPS geçişi artık isteğe bağlı değildir.",
+      words: ["For", "this", "reason", "HTTPS", "migration", "is", "no", "longer", "optional", "must", "Chrome"]
     }
   },
   {
     id: 6,
     titleTr: "SLAYT 06 · HTTPS'e Geçtiğimizde Ne Değişir?",
     titleEn: "SLIDE 06 · What Changes When We Move to HTTPS?",
-    scriptTr: "HTTPS bağlantısında trafiğimiz şifreli bir tünelden geçer. Güvenlik için iyidir ama bu durum akışımızı değiştirir. Operatör isteğin içeriğini göremez. Bu yüzden telefon numarasını ekleyemez. Otomatik giriş durur.",
-    scriptEn: "On HTTPS, our traffic is encrypted. The operator cannot see the request. So, they cannot add the phone number. The automatic login stops working.",
+    scriptTr: "HTTPS'e geçişle birlikte trafiğimiz şifreli bir tünelin içinden geçmeye başlar. Bu, güvenlik açısından son derece önemli ve gerekli bir adımdır; ancak bizim için bir yan etki oluşturur. Operatör, artık isteğin içeriğine erişemediği için telefon numarasını isteğe başlık olarak ekleyemez. Yani HTTPS'e geçer geçmez, operatörden otomatik olarak gelen MSISDN bilgisi kesilir. Bu, mevcut akışımızın aynı şekilde sürdürülememesi anlamına gelir.",
+    scriptEn: "With the HTTPS migration, our traffic begins flowing through an encrypted tunnel. This is essential for security and user trust, but it has a side effect for our flow. Because the operator can no longer see inside the request, it cannot add the phone number as a header. In other words, as soon as we move to HTTPS, the MSISDN information that used to arrive automatically from the operator is cut off. Our current flow can no longer continue in the same form.",
     vocabulary: [
       { word: "encrypted tunnel", tr: "şifreli tünel" },
       { word: "side effect", tr: "yan etki" },
@@ -659,17 +659,17 @@ export const presentationSlides = [
       { word: "Grace Period", tr: "Tolerans Süresi. Bakiye yetersizliğinde üyeliğin askıda tutulup çekilmeye çalışıldığı süre." }
     ],
     sentenceBuilder: {
-      target: "The automatic login stops working",
-      targetTr: "Otomatik giriş çalışmayı durdurur.",
-      words: ["The", "automatic", "login", "stops", "working"]
+      target: "The current flow can no longer continue in the same form",
+      targetTr: "Mevcut akış artık aynı biçimde devam edemez.",
+      words: ["The", "current", "flow", "can", "no", "longer", "continue", "in", "the", "same", "form", "work", "operator"]
     }
   },
   {
     id: 7,
-    titleTr: "SLAYT 07 · Modelimizin Etkisi",
+    titleTr: "SLAYT 07 · Uygulamamıza Etkisi",
     titleEn: "SLIDE 07 · How It Affects Our Application",
-    scriptTr: "Sonra ne olacak? Kullanıcıyı otomatik olarak tanıyamayız. Kullanıcı numarasını elle yazmak zorunda kalır. Veya SMS kodu bekler. Bu durum üye olma oranını çok düşürür.",
-    scriptEn: "What happens next? We cannot know the user automatically. The user must type their number manually. Or they must wait for an SMS code. This makes our conversion drop.",
+    scriptTr: "Bu durumun somut sonuçları şu şekilde ortaya çıkar: MSISDN bilgisi backend'e ulaşmadığında, sistem kullanıcıyı otomatik olarak tanıyamaz. Bu noktada kullanıcıdan ya telefon numarasını manuel olarak girmesi ya da OTP doğrulaması yapması istenir. Her bir ek adım, dönüşüm oranımızda kayda değer bir düşüş anlamına gelir. Kullanıcı reklamı görür, tıklar, sayfaya ulaşır; ancak abonelik akışına geçmek yerine önce numara girer, ardından SMS bekler, sonra OTP'yi yazar. Bu zincirin her halkasında belirli bir oranda kullanıcı kaybı yaşanır. Dolayısıyla bu mesele, yalnızca teknik bir başlık değil; doğrudan iş sonuçlarımıza yansıyan bir konudur.",
+    scriptEn: "The concrete consequences are as follows: when MSISDN does not reach the backend, the system cannot recognize the user automatically. At that point, the user is asked to enter their phone number manually or complete an OTP verification. Each additional step translates into a measurable drop in conversion. The user sees the ad, clicks, reaches the landing page; but rather than moving into the subscription flow, they first enter a phone number, then wait for an SMS, then type the OTP. At each step in this chain we lose a portion of users. So this is not merely a technical header problem — it directly affects our business outcomes.",
     vocabulary: [
       { word: "consequences", tr: "sonuçlar" },
       { word: "measurable drop", tr: "ölçülebilir düşüş" },
@@ -679,17 +679,17 @@ export const presentationSlides = [
       { word: "Lifetime Value (LTV)", tr: "Abone Ömür Boyu Değeri. Bir abonenin sistemde kaldığı süre boyunca kazandırdığı toplam net gelir." }
     ],
     sentenceBuilder: {
-      target: "This makes our conversion drop",
-      targetTr: "Bu durum dönüşümümüzü düşürür.",
-      words: ["This", "makes", "our", "conversion", "drop"]
+      target: "Each additional step translates into a measurable drop",
+      targetTr: "Her ek adım ölçülebilir bir düşüş anlamına gelir.",
+      words: ["Each", "additional", "step", "translates", "into", "a", "measurable", "drop", "conversion", "fall"]
     }
   },
   {
     id: 8,
-    titleTr: "SLAYT 08 · İki Yönlü Risk, Tek Bir Karar",
+    titleTr: "SLAYT 08 · İki Yönlü Risk, Tek Karar",
     titleEn: "SLIDE 08 · Two-Sided Risk, One Decision",
-    scriptTr: "İki temel riskimiz var. HTTP'de kalırsak kullanıcılar uyarı görür. Plansız HTTPS'e geçersek otomatik giriş bozulur. Güvenli bir çözüme ihtiyacımız var.",
-    scriptEn: "We have two risks. If we stay on HTTP, users see warnings. If we move to HTTPS without a plan, automatic login fails. We need a safe solution.",
+    scriptTr: "Bu noktada iki yönlü bir riskle karşı karşıyayız. Bir tarafta HTTP'de kalmaya devam edersek, Chrome uyarısı nedeniyle kullanıcıyı landing sayfasına ulaşmadan kaybediyoruz. Diğer tarafta plansız bir HTTPS geçişi yaparsak, otomatik tanıma akışımız bozulduğu için dönüşüm oranımız düşüyor. Yani 'hiçbir şey yapmamak' bir seçenek değildir; ancak 'aceleyle HTTPS'e geçmek' de yeterli bir çözüm değildir. Hedefimiz çok nettir: HTTPS'e güvenli biçimde geçmek ve bu geçişi yaparken mevcut kullanıcı tanıma akışımızı mümkün olduğunca korumaktır.",
+    scriptEn: "At this stage we are facing a two-sided risk. On one side, if we stay on HTTP, we lose users before they ever see our landing page, due to the Chrome warning. On the other side, if we move to HTTPS without a plan, our automatic recognition flow breaks and conversion drops. Doing nothing is not an option; rushing into HTTPS without preparation is not a solution either. Our objective is clear: to migrate to HTTPS safely while preserving our user recognition flow as much as possible.",
     vocabulary: [
       { word: "two-sided risk", tr: "iki yönlü risk" },
       { word: "doing nothing", tr: "hiçbir şey yapmamak" },
@@ -697,17 +697,17 @@ export const presentationSlides = [
       { word: "preserving", tr: "korumak / muhafaza etmek" }
     ],
     sentenceBuilder: {
-      target: "We need a safe solution",
-      targetTr: "Güvenli bir çözüme ihtiyacımız var.",
-      words: ["We", "need", "a", "safe", "solution"]
+      target: "At this stage we are facing a two-sided risk",
+      targetTr: "Bu aşamada iki yönlü bir riskle karşı karşıyayız.",
+      words: ["At", "this", "stage", "we", "are", "facing", "a", "two-sided", "risk", "decision", "stay"]
     }
   },
   {
     id: 9,
     titleTr: "SLAYT 09 · Hedefimizi Üç Sütunla Tanımlıyoruz",
     titleEn: "SLIDE 09 · Our Goal in Three Pillars",
-    scriptTr: "Üç hedefimiz var. Birincisi, güvenli bir bağlantı. İkincisi, kullanıcının otomatik tanınması. Üçüncüsü ise formsuz ve kolay bir deneyim.",
-    scriptEn: "We have three goals. First, a secure connection. Second, automatic recognition of the user. Third, an easy experience with no extra forms.",
+    scriptTr: "Hedefimizi üç başlık altında özetleyebiliriz. Birincisi, güvenli bağlantı: Kullanıcı sayfamıza geldiğinde yeşil kilit simgesini görmeli, tarayıcı herhangi bir uyarı vermemelidir. İkincisi, otomatik tanıma: MSISDN bilgisinin kesilmesinin önüne geçerek backend'in kullanıcıyı tanımaya devam etmesini sağlamalıyız. Üçüncüsü, sürtünmesiz deneyim: Manuel form, ek OTP veya gereksiz adımlar olmamalıdır. Bu üç başlığı bir arada karşılayamadığımız sürece, ya güveni, ya dönüşümü ya da kullanıcı deneyimini kaybetme riskiyle karşı karşıya kalırız.",
+    scriptEn: "We can summarize our objective under three headings. First, a secure connection: users should see the green padlock and the browser should not display any warning. Second, automatic recognition: we must preserve the MSISDN flow so the backend can continue to recognize the user. Third, a frictionless experience: there should be no manual forms, additional OTPs, or unnecessary steps. Unless all three are satisfied together, we risk losing either trust, conversion, or user experience.",
     vocabulary: [
       { word: "padlock", tr: "asma kilit (tarayıcıdaki kilit simgesi)" },
       { word: "under three headings", tr: "üç başlık altında" },
@@ -716,17 +716,17 @@ export const presentationSlides = [
       { word: "MO SMS", tr: "Mobile Originated. Kullanıcının faturasından düşerek kısa numaraya yolladığı SMS." }
     ],
     sentenceBuilder: {
-      target: "We have three goals",
-      targetTr: "Üç hedefimiz var.",
-      words: ["We", "have", "three", "goals"]
+      target: "We can summarize our objective under three headings",
+      targetTr: "Hedefimizi üç başlık altında özetleyebiliriz.",
+      words: ["We", "can", "summarize", "our", "objective", "under", "three", "headings", "goals", "pillars"]
     }
   },
   {
     id: 10,
-    titleTr: "SLAYT 10 · Çözüm: MSISDN'i Farklı Bir Yerde Taşımak (Extension 1000)",
+    titleTr: "SLAYT 10 · Çözüm: MSISDN'i Farklı Yerde Taşımak (Extension 1000)",
     titleEn: "SLIDE 10 · Solution: Carrying the MSISDN Elsewhere (Extension 1000)",
-    scriptTr: "Operatör Extension 1000 adında bir çözüm sunuyor. Numarayı HTTP isteğine koyamayız. Ama TLS el sıkışması sırasında gönderebiliriz. Bu özel bir alandır.",
-    scriptEn: "The operator offers Extension 1000. We cannot put the number in the request. But we can send it during the TLS connection handshake. This is a special field.",
+    scriptTr: "Tam bu noktada Türk Telekom'un önerdiği Extension 1000 yaklaşımı devreye giriyor. Yaklaşımın mantığı oldukça basittir: Telefon numarasını artık HTTP isteğinin içine eklemek mümkün değildir; çünkü trafik baştan sona şifrelidir. Buna karşılık, bağlantı kurulurken — yani şifreli tünel henüz kapanmadan, taraflar el sıkışırken — özel bir alanda bu bilgiyi taşımak mümkündür. İşte bu özel alana Extension 1000 adı verilir. Yani operatör artık MSISDN bilgisini isteğin içine değil, el sıkışmanın içine yerleştirir.",
+    scriptEn: "This is where the operator-provided solution — Extension 1000 — comes into play. The idea is straightforward: we can no longer place the phone number inside the HTTP request, because the traffic is encrypted end to end. However, before the encrypted tunnel is established — while the two sides are still performing the TLS handshake — the information can be carried inside a dedicated field. This field is called Extension 1000. In other words, the operator no longer places MSISDN inside the request, but inside the handshake.",
     vocabulary: [
       { word: "TLS handshake", tr: "TLS el sıkışması (bağlantı başlangıcı)" },
       { word: "dedicated field", tr: "özel / tahsis edilmiş alan" },
@@ -734,51 +734,51 @@ export const presentationSlides = [
       { word: "Header Enrichment", tr: "Operatörün şebeke seviyesinde MSISDN'i istek başlığına yerleştirme teknolojisi." }
     ],
     sentenceBuilder: {
-      target: "The operator offers Extension 1000",
-      targetTr: "Operatör Extension 1000 çözümünü sunuyor.",
-      words: ["The", "operator", "offers", "Extension", "1000"]
+      target: "This field is called Extension 1000",
+      targetTr: "Bu alan Extension 1000 olarak adlandırılır.",
+      words: ["This", "field", "is", "called", "Extension", "1000", "handshake", "TLS", "name"]
     }
   },
   {
     id: 11,
     titleTr: "SLAYT 11 · Bizim Çözümümüz: Proxy Katmanı",
     titleEn: "SLIDE 11 · Our Solution: A Proxy Layer",
-    scriptTr: "Kendi tarafımızda bir proxy katmanı kullanacağız. Proxy Extension 1000 alanını okur. Telefon numarasını bulur ve backend'e gönderir. Backend üzerinde değişiklik yapmaya gerek kalmaz.",
-    scriptEn: "On our side, we use a proxy layer. The proxy reads Extension 1000. It finds the phone number and sends it to our backend. The backend does not change.",
+    scriptTr: "Bizim tarafımızda ise bu bilgiyi kullanılabilir hâle getirmek için bir proxy katmanı devreye girer. Proxy, gelen bağlantıdaki Extension 1000 alanını okur; içinden telefon numarasını ayıklar ve backend'in zaten anladığı standart başlık formatına çevirir. Bu sayede backend tarafında herhangi bir değişiklik yapmamıza neredeyse gerek kalmaz; çünkü backend, eskiden olduğu gibi MSISDN başlığını okuyup işine devam eder. Tüm dönüştürme işi proxy katmanında gerçekleşir. Bu yaklaşım sayesinde backend'e dokunmadan, mevcut akışımızı koruyabiliriz.",
+    scriptEn: "On our side, a proxy layer makes this information usable. The proxy reads the Extension 1000 field from the incoming connection, extracts the phone number, and converts it into the standard header format the backend already understands. As a result, almost no change is required on the backend side; it continues to read the MSISDN header exactly as before. All translation work happens at the proxy layer. With this approach, we preserve our existing flow without touching the backend.",
     vocabulary: [
       { word: "proxy layer", tr: "vekil sunucu katmanı" },
       { word: "extracts", tr: "söker / ayıklar" },
       { word: "header format", tr: "başlık formatı" }
     ],
     sentenceBuilder: {
-      target: "The proxy reads Extension 1000",
-      targetTr: "Proxy Extension 1000 alanını okur.",
-      words: ["The", "proxy", "reads", "Extension", "1000"]
+      target: "All translation work happens at the proxy layer",
+      targetTr: "Tüm çeviri (dönüştürme) işi proxy katmanında gerçekleşir.",
+      words: ["All", "translation", "work", "happens", "at", "the", "proxy", "layer", "backend", "change"]
     }
   },
   {
     id: 12,
     titleTr: "SLAYT 12 · Extension 1000'in Sınırları",
     titleEn: "SLIDE 12 · The Limits of Extension 1000",
-    scriptTr: "Ancak Extension 1000 çözümü yüzde yüz kesin değildir. Her tarayıcıda çalışmayabilir. Örneğin, TLS 1.3 sürümünde hata verebilir. Bu yüzden yedek bir plana ihtiyacımız var.",
-    scriptEn: "But Extension 1000 is not 100% perfect. It does not work on all browsers. For example, with TLS 1.3, it might fail. We need a backup plan.",
+    scriptTr: "Bu noktada açık olmamız gereken bir konu var. Extension 1000 güçlü bir çözüm adayıdır; ancak her senaryoda yüzde yüz garanti sunan bir yöntem değildir. Farklı tarayıcıların ve cihazların davranışları birebir aynı olmayabilir. Özellikle modern güvenlik standartları — TLS 1.3 gibi — devreye girdiğinde, bazı kombinasyonlarda Extension 1000 düşebilir. Bu nedenle 'Extension 1000 var, mesele kapanmıştır' demek doğru bir yaklaşım olmaz. Bilgi geldi mi gelmedi mi, gelmediği durumda ne yapacağız sorusunun yanıtı mutlaka önceden hazır olmalıdır.",
+    scriptEn: "There is one point we should be transparent about. Extension 1000 is a strong candidate, but it does not provide a one-hundred-percent guarantee in every scenario. Different browsers and devices may not behave identically. In particular, with modern security standards such as TLS 1.3, Extension 1000 may not be available in some combinations. Therefore, saying 'Extension 1000 is in place, problem solved' would not be accurate. We must always have an answer ready for the situations in which the information does not arrive.",
     vocabulary: [
       { word: "transparent", tr: "şeffaf / açık" },
       { word: "guarantee", tr: "garanti" },
       { word: "security standards", tr: "güvenlik standartları" }
     ],
     sentenceBuilder: {
-      target: "We need a backup plan",
-      targetTr: "Yedek bir plana ihtiyacımız var.",
-      words: ["We", "need", "a", "backup", "plan"]
+      target: "We must always have an answer ready",
+      targetTr: "Daima hazır bir cevabımız (çözümümüz) olmalıdır.",
+      words: ["We", "must", "always", "have", "an", "answer", "ready", "limit", "fail", "backup"]
     }
   },
   {
     id: 13,
     titleTr: "SLAYT 13 · Alternatif Çözüm Yolları",
     titleEn: "SLIDE 13 · Alternative Solution Paths",
-    scriptTr: "Extension 1000 tek seçeneğimiz değil. Başka çözümlerimiz de var. Operatör API entegrasyonu yapabiliriz. SMS doğrulama ekleyebiliriz. Veya session ID takibi yapabiliriz.",
-    scriptEn: "Extension 1000 is not our only option. We have other solutions. One is operator API. Another is SMS verification. We can also track session IDs.",
+    scriptTr: "Extension 1000 elimizdeki tek yöntem değildir. MSISDN tabanlı kullanıcı tanımayı sürdürmek için, birbirinden bağımsız olarak değerlendirebileceğimiz dört alternatif çözüm yolu daha bulunmaktadır. İlk alternatif Operatör API entegrasyonudur. İkinci alternatif kullanıcıdan OTP doğrulamasıdır. Üçüncü alternatif click-id ya da session-id tabanlı takiptir. Dördüncü alternatif ise trusted proxy yaklaşımıdır. Karar verirken bu dört yöntemin avantajlarını ve sınırlarını birlikte değerlendirmemiz uygun olur.",
+    scriptEn: "Extension 1000 is not the only option we have. To sustain MSISDN-based user recognition, we have four additional alternative solutions, each of which can be evaluated independently. The first alternative is operator API integration. The second alternative is OTP verification by the user. The third alternative is click-id or session-id based tracking. The fourth alternative is the trusted proxy approach. When choosing among these, we should weigh the advantages and limits of all four together.",
     vocabulary: [
       { word: "sustain", tr: "sürdürmek" },
       { word: "evaluated independently", tr: "bağımsız olarak değerlendirilmek" },
@@ -788,26 +788,26 @@ export const presentationSlides = [
       { word: "Compliance", tr: "Yasal Uyum. Sayfa ve onay tasarımlarının BTK ve Operatör kurallarına uygunluğu." }
     ],
     sentenceBuilder: {
-      target: "Extension 1000 is not our only option",
-      targetTr: "Extension 1000 tek seçeneğimiz değil.",
-      words: ["Extension", "1000", "is", "not", "our", "only", "option"]
+      target: "Extension 1000 is not the only option we have",
+      targetTr: "Extension 1000 sahip olduğumuz tek seçenek değildir.",
+      words: ["Extension", "1000", "is", "not", "the", "only", "option", "we", "have", "solutions", "choices"]
     }
   },
   {
     id: 14,
     titleTr: "SLAYT 14 · Kapanış — Karar Noktası",
     titleEn: "SLIDE 14 · Closing — Decision Point",
-    scriptTr: "Kapatırken durumumuz şudur. Proxy çözümümüz varsayılan mobil tarayıcılarda iyi çalışıyor. Ancak Chrome ve Firefox üzerinde hata veriyor. Operatörden geri bildirim bekliyoruz.",
-    scriptEn: "To close, our proxy works on default mobile browsers. But it fails on Chrome and Firefox. We are waiting for the operator's feedback.",
+    scriptTr: "Sözlerimi bir sonuç ve bir karar noktasıyla toparlamak istiyorum. Şu ana kadar Pexala olarak bu konuda yapabileceğimiz hazırlıkları büyük ölçüde tamamladık. Geliştirdiğimiz proxy çözümü, varsayılan mobil tarayıcılarda sorunsuz biçimde çalışmaktadır. Ancak Chrome ve Firefox gibi modern tarayıcılarda Türk Telekom tarafında Extension 1000 bilgisinin yakalanamadığı tespit edilmiştir. Bu durumu TT ekipleriyle paylaştık ve geri dönüşlerini bekliyoruz.",
+    scriptEn: "I'd like to close my remarks with a status update and a decision point. On the Pexala side, we have largely completed the preparations we can make on this topic. The proxy solution we have developed works successfully on default mobile browsers. However, on modern browsers such as Chrome and Firefox, it has been observed that the operator side cannot capture the Extension 1000 information. We have formally raised this finding with the operator teams and are currently waiting for their response.",
     vocabulary: [
       { word: "status update", tr: "durum güncellemesi" },
       { word: "raised this finding", tr: "bu bulguyu ilettik / sunduk" },
       { word: "decision rests with", tr: "karar ...'a aittir" }
     ],
     sentenceBuilder: {
-      target: "We are waiting for the operator's feedback",
-      targetTr: "Operatörün geri bildirimini bekliyoruz.",
-      words: ["We", "are", "waiting", "for", "the", "operator's", "feedback"]
+      target: "We have largely completed the preparations",
+      targetTr: "Hazırlıkları büyük ölçüde tamamladık.",
+      words: ["We", "have", "largely", "completed", "the", "preparations", "ready", "operator", "Pexala"]
     }
   }
 ];
