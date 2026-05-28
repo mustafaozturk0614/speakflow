@@ -227,3 +227,25 @@ export const updateVocabularyCardSrs = (english, type, rating) => {
   }
 };
 
+// 7. Recent Mistakes Logging
+export const getRecentMistakes = () => {
+  try {
+    return JSON.parse(localStorage.getItem("speakflow_recent_mistakes") || "[]");
+  } catch (e) {
+    return [];
+  }
+};
+
+export const logMistake = (wrong, correct, explanation) => {
+  if (!wrong || !correct) return;
+  const list = getRecentMistakes();
+  // Avoid duplicate entries
+  if (list.some(m => m.wrong.toLowerCase().trim() === wrong.toLowerCase().trim())) return;
+  list.unshift({ wrong, correct, explanation, date: Date.now() });
+  // Keep only the 10 most recent mistakes
+  const trimmed = list.slice(0, 10);
+  localStorage.setItem("speakflow_recent_mistakes", JSON.stringify(trimmed));
+  window.dispatchEvent(new CustomEvent("speakflow_mistakes_changed"));
+  syncLocalToCloud();
+};
+

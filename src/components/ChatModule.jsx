@@ -13,6 +13,7 @@ import {
 import { SpeechRecognizer, speakText, stopSpeaking } from "../utils/speech";
 import { evaluateSentenceLocally } from "../utils/diagnostics";
 import { hasApiKey, callGeminiAPI, COACH_SYSTEM_PROMPT } from "../utils/gemini";
+import { logMistake } from "../utils/gamification";
 
 export default function ChatModule() {
   const [level, setLevel] = useState("intermediate"); // beginner, intermediate, advanced
@@ -149,9 +150,15 @@ Follow these rules:
             );
             coachReply = result.coachResponse;
             correctionData = result.correction?.hasError ? result.correction : null;
+            if (correctionData) {
+              logMistake(correctionData.wrongText, correctionData.correctText, correctionData.explanation);
+            }
           } else {
             // Offline mock fallback
             correctionData = evaluateSentenceLocally(transcript);
+            if (correctionData && correctionData.hasError) {
+              logMistake(correctionData.wrongText, correctionData.correctText, correctionData.explanation);
+            }
             const mockResponses = [
               "That is very interesting. Tell me more about it.",
               "Nice! How long have you been doing that?",
@@ -275,6 +282,10 @@ Format response as a JSON:
           systemPrompt
         );
 
+        if (response.correction?.hasError) {
+          logMistake(response.correction.wrongText, response.correction.correctText, response.correction.explanation);
+        }
+
         setMessages(prev => [...prev, {
           role: "assistant",
           content: response.coachResponse,
@@ -286,6 +297,9 @@ Format response as a JSON:
         // OFFLINE MOCK MODE
         // Local response generation
         const localCorrection = evaluateSentenceLocally(userText);
+        if (localCorrection && localCorrection.hasError) {
+          logMistake(localCorrection.wrongText, localCorrection.correctText, localCorrection.explanation);
+        }
         
         setTimeout(() => {
           const mockResponses = [

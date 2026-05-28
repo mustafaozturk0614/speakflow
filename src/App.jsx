@@ -8,6 +8,9 @@ import PresentationModule from "./components/PresentationModule";
 import PatternModule from "./components/PatternModule";
 import ExpressionsModule from "./components/ExpressionsModule";
 import SimulationModule from "./components/SimulationModule";
+import RoleplayModule from "./components/RoleplayModule";
+import LessonGeneratorModule from "./components/LessonGeneratorModule";
+import AnalyticsModule from "./components/AnalyticsModule";
 import RoutineModule from "./components/RoutineModule";
 import ChatModule from "./components/ChatModule";
 import { awardXP } from "./utils/gamification";
@@ -82,6 +85,12 @@ export default function App() {
         return <ExpressionsModule />;
       case "simulation":
         return <SimulationModule />;
+      case "roleplay":
+        return <RoleplayModule />;
+      case "lessons":
+        return <LessonGeneratorModule />;
+      case "analytics":
+        return <AnalyticsModule />;
       case "routine":
         return <RoutineModule />;
       case "chat":

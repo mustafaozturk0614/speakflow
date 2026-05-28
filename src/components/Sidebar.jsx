@@ -10,7 +10,9 @@ import {
   BookMarked,
   LayoutDashboard,
   Presentation,
-  Flame
+  Flame,
+  Users,
+  BarChart2
 } from "lucide-react";
 import { getStreak } from "../utils/gamification";
 import { openNetlifyLogin, logoutNetlify } from "../utils/netlifySync";
@@ -33,6 +35,9 @@ export default function Sidebar({ activeTab, setActiveTab, onOpenSettings, user 
     { id: "patterns", label: "Konuşma Kalıpları", icon: Compass, desc: "Günlük pratik şablonlar (Chunks)" },
     { id: "expressions", label: "Doğal İfadeler", icon: BookMarked, desc: "Deyimler ve günlük tabirler" },
     { id: "simulation", label: "Konuşma Simülasyonu", icon: MessageSquare, desc: "Gerçek hayat canlandırmaları" },
+    { id: "roleplay", label: "Rol Yapma Odası", icon: Users, desc: "Senaryolu yapay zeka araması" },
+    { id: "lessons", label: "Ders Üretici", icon: Sparkles, desc: "Kişisel yapay zeka müfredatı" },
+    { id: "analytics", label: "Gelişim Analitiği", icon: BarChart2, desc: "XP ve akıcılık grafikleri" },
     { id: "routine", label: "15 Dk Günlük Rutin", icon: Clock, desc: "Hızlı günlük çalışma programı" },
     { id: "chat", label: "Sürekli Eğitim / AI", icon: Sparkles, desc: "Ucu açık AI sohbet arkadaşı" }
   ];

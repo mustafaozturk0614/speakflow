@@ -16,7 +16,7 @@ import { simulationScenarios } from "../utils/mockData";
 import { SpeechRecognizer, speakText, stopSpeaking } from "../utils/speech";
 import { evaluateSentenceLocally } from "../utils/diagnostics";
 import { hasApiKey, callGeminiAPI, COACH_SYSTEM_PROMPT } from "../utils/gemini";
-import { awardXP } from "../utils/gamification";
+import { awardXP, logMistake } from "../utils/gamification";
 
 export default function SimulationModule() {
   const [selectedScenario, setSelectedScenario] = useState(null);
@@ -110,6 +110,14 @@ export default function SimulationModule() {
           COACH_SYSTEM_PROMPT
         );
 
+        if (geminiResponse.correction?.hasError) {
+          logMistake(
+            geminiResponse.correction.wrongText,
+            geminiResponse.correction.correctText,
+            geminiResponse.correction.explanation
+          );
+        }
+
         const newMsg = {
           role: "assistant",
           content: geminiResponse.coachResponse,
@@ -148,6 +156,14 @@ export default function SimulationModule() {
               break;
             }
           }
+        }
+
+        if (correctionData && correctionData.hasError) {
+          logMistake(
+            correctionData.wrongText,
+            correctionData.correctText,
+            correctionData.explanation
+          );
         }
 
         // 2. Schedule next step response
